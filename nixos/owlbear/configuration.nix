@@ -242,6 +242,7 @@
   };
 
   fonts.packages = with pkgs; [
+    nerd-fonts.iosevka
     iosevka
     arkpandora_ttf
   ];
