@@ -12,6 +12,10 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -21,6 +25,7 @@
       nix-alien,
       lanzaboote,
       nur,
+      sops-nix,
       ...
     }@attrs:
     {
@@ -30,6 +35,7 @@
         modules = [
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
+          sops-nix.nixosModules.sops
           ./nixos/owlbear/configuration.nix
         ];
       };

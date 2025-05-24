@@ -16,6 +16,7 @@
     ./hardware-configuration.nix
     ./fedora.nix
     ./secureboot.nix
+    ./sops.nix
 
     ../shared/convenient-defaults.nix
   ];
@@ -74,6 +75,8 @@
       wl-clipboard
 
       gnumake
+
+      emacs
     ];
   };
 
@@ -91,6 +94,8 @@
     hunspellDicts.en_US-large
 
     self.inputs.nix-alien.packages.x86_64-linux.nix-alien
+
+    gnupg
   ];
 
   programs.nix-ld.enable = true;

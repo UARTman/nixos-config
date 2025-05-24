@@ -1,0 +1,10 @@
+keys:
+  - &uartman_gpg 6D9EAEB0E8914070D8503E2E25EC4F114B84C731
+  - &owlbear_host age1lf6hkfljvj9e05n57aepnpgezvpyz2q42zrqcm809a8quypnnv5qn2jg77
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - pgp:
+        - *uartman_gpg
+        age: 
+        - *owlbear_host
