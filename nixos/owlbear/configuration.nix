@@ -17,8 +17,11 @@
     ./fedora.nix
     ./secureboot.nix
     ./sops.nix
+    # ./wifi-passwords.nix
+
 
     ../shared/convenient-defaults.nix
+    ../shared/wifi-passwords.nix
   ];
 
   networking.hostName = "owlbear";
