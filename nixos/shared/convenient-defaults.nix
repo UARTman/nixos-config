@@ -10,13 +10,8 @@
     ./steam.nix
     ./idris2.nix
     ./neovim.nix
+    ./syncthing.nix
   ];
-  # options = {
-  #   mySystem.hostname = lib.mkOption {
-  #     type = lib.types.str;
-  #     description = "User's host name";
-  #   };
-  # };
 
   config = {
 
@@ -36,6 +31,7 @@
     # Enable networking
     networking.networkmanager.enable = true;
 
+    # Network discovery
     services.avahi = {
       enable = true;
       nssmdns4 = true;

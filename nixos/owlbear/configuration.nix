@@ -19,7 +19,6 @@
     ./sops.nix
     # ./wifi-passwords.nix
 
-
     ../shared/convenient-defaults.nix
     ../shared/wifi-passwords.nix
   ];
@@ -51,6 +50,7 @@
       "networkmanager"
       "wheel"
       "docker"
+      "kvm"
     ];
     packages = with pkgs; [
       kdePackages.kate
@@ -67,7 +67,7 @@
       tinymist
       typst
       # VS Code
-      vscode-fhs
+      # vscode-fhs
       # Gaming?
       lutris
       xivlauncher
@@ -92,6 +92,9 @@
     vlc
     libvlc
 
+    obsidian
+    obsidian-export
+
     hunspell
     hunspellDicts.ru_RU
     hunspellDicts.en_US-large
@@ -106,9 +109,7 @@
     # fontconfig
     # wayland
     # libX11
-    (pkgs.runCommand "steamrun-lib" { }
-      "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib"
-    )
+    (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
   ];
 
   virtualisation.waydroid.enable = true;
@@ -125,6 +126,24 @@
     joinNetworks = [
       "1d71939404bd0816"
     ];
+  };
+
+  services.syncthing = {
+    user = "uartman";
+    dataDir = "/home/uartman/";
+    configDir = "/home/uartman/.config/syncthing";
+    settings = {
+      devices = {
+        "uartpc" = { id = "CY5YEK2-BCLLIQI-2S7RDTQ-5UTH7TW-OSH57RK-HZ46Q5D-ANJD4RI-B24PKAY"; };
+        "pixel" = { id = "YOABTVV-RXHTLM2-SVLE6OG-DXOYLFE-ZQ7LVGR-3SCXZDF-D7EUTKZ-2PHQ3QI"; };
+      };
+      folders = {
+        "Main Obsidian Vault" = {
+          path = "/home/uartman/Documents/Obsidian vaults/Main Vault/";
+          devices = [ "uartpc" "pixel" ];
+        };
+      };
+    };
   };
 
   # This value determines the NixOS release from which the default
