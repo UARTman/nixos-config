@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-alien.url = "github:thiagokokada/nix-alien";
+    # obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";
 
@@ -16,27 +17,51 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.obsidian-nvim.follows = "obsidian-nvim"; # <- this will use the obsidian-nvim from your inputs
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      # The `follows` keyword in inputs is used for inheritance.
+      # Here, `inputs.nixpkgs` of home-manager is kept consistent with
+      # the `inputs.nixpkgs` of the current flake,
+      # to avoid problems caused by different versions of nixpkgs.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       self,
       nixpkgs,
-      nix-alien,
+      home-manager,
       lanzaboote,
       nur,
       sops-nix,
+      nvf,
       ...
-    }@attrs:
+    }@inputs:
     {
       nixosConfigurations.owlbear = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = attrs;
+        specialArgs = inputs;
         modules = [
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
           sops-nix.nixosModules.sops
+          nvf.nixosModules.default
           ./nixos/owlbear/configuration.nix
+        ];
+      };
+
+      homeConfigurations.owlbear-uartman = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+          nvf.homeManagerModules.default
+          ./home-manager/owlbear-uartman/home.nix
         ];
       };
 

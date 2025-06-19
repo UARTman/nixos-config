@@ -86,31 +86,18 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    nekoray
-    tun2proxy
-    lazygit
-    vlc
-    libvlc
-
-    obsidian
-    obsidian-export
-
-    hunspell
-    hunspellDicts.ru_RU
-    hunspellDicts.en_US-large
-
     self.inputs.nix-alien.packages.x86_64-linux.nix-alien
-
-    gnupg
   ];
 
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # fontconfig
-    # wayland
-    # libX11
-    (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
-  ];
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      # fontconfig
+      # wayland
+      # libX11
+      (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
+    ];
+  };
 
   virtualisation.waydroid.enable = true;
 
@@ -118,33 +105,26 @@
     arkpandora_ttf
   ];
 
-  networking.firewall.trustedInterfaces = [ "tun0" ];
-  networking.firewall.checkReversePath = "loose";
-
-  services.zerotierone = {
-    enable = true;
-    joinNetworks = [
-      "1d71939404bd0816"
-    ];
-  };
-
   services.syncthing = {
     user = "uartman";
     dataDir = "/home/uartman/";
     configDir = "/home/uartman/.config/syncthing";
     settings = {
-      devices = {
-        "uartpc" = { id = "CY5YEK2-BCLLIQI-2S7RDTQ-5UTH7TW-OSH57RK-HZ46Q5D-ANJD4RI-B24PKAY"; };
-        "pixel" = { id = "YOABTVV-RXHTLM2-SVLE6OG-DXOYLFE-ZQ7LVGR-3SCXZDF-D7EUTKZ-2PHQ3QI"; };
-      };
       folders = {
         "Main Obsidian Vault" = {
           path = "/home/uartman/Documents/Obsidian vaults/Main Vault/";
-          devices = [ "uartpc" "pixel" ];
+          devices = [
+            "uartpc"
+            "pixel"
+          ];
         };
       };
     };
   };
+
+  
+  boot.kernelParams = ["i915.enable_psr=1"];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
