@@ -2,7 +2,7 @@
   pkgs,
   config,
   ...
-}:
+}@inputs:
 
 {
   imports = [
@@ -19,7 +19,10 @@
         git
         lazygit
 
+        # Direnv - for nix stuff - TODO: Direnv enable option?
         direnv
+
+        # Useful for killing stuff
         killall
 
         vlc
@@ -27,12 +30,36 @@
 
         obsidian
         obsidian-export
+        zotero-beta
 
         hunspell
         hunspellDicts.ru_RU
         hunspellDicts.en_US-large
 
         gnupg
+
+        gnumake
+
+        # Libreoffice (TODO: try fixing wayland bug sometime soon)
+        libreoffice-qt6-fresh
+
+        # For convenient text edits
+        kdePackages.kate
+
+        # Chat clients
+        telegram-desktop
+        vesktop
+        element-desktop
+
+        # Gaming
+        lutris
+        xivlauncher
+
+        tor-browser
+
+        qbittorrent
+
+        yubioath-flutter
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
@@ -213,6 +240,9 @@
       "nix-command"
       "flakes"
     ];
+    nix.registry = {
+      nixpkgs.flake = inputs.nixpkgs;
+    };
 
     virtualisation.docker.enable = true;
 
