@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -174,7 +174,10 @@
           enable = true;
           setupOpts = {
             marks.Cursor.blend = 70;
-            excluded_buftypes = ["terminal" "nofile"];
+            excluded_buftypes = [
+              "terminal"
+              "nofile"
+            ];
           };
         };
         nvim-web-devicons.enable = true;
@@ -241,6 +244,12 @@
           action = ":bdelete<CR>";
           desc = "Close buffer";
         }
+        {
+          key = "<leader>bq";
+          mode = [ "n" ];
+          action = ":bdelete<CR>";
+          desc = "Close buffer";
+        }
       ];
 
       lazy.plugins = {
@@ -248,7 +257,10 @@
           package = pkgs.vimPlugins.idris2-nvim;
           setupModule = "idris2";
           setupOpts = {
-            server.settings.briefCompletions = true;
+            server = {
+              settings.briefCompletions = true;
+              on_attach = lib.generators.mkLuaInline "function(client, buffer) default_on_attach(client, buffer) end";
+            };
           };
         };
       };
