@@ -122,8 +122,16 @@
     };
   };
 
-  boot.kernelParams = [ "i915.enable_psr=1" ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    kernelParams = [
+      "i915.enable_psr=1"
+      "i915.enable_guc=0"
+    ];
+    kernel.sysctl = {
+      "dev.i915.perf_stream_paranoid" = 0;
+    };
+    kernelPackages = pkgs.linuxPackages_latest;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
