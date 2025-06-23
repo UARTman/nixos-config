@@ -221,6 +221,23 @@
         hmf = "home-manager --flake .#$HOSTNAME-$USER";
       };
 
+      zsh = {
+        enable = true;
+        enableBashCompletion = true;
+        enableCompletion = true;
+        enableLsColors = true;
+        autosuggestions = {
+          enable = true;
+          async = false;
+        };
+        syntaxHighlighting = {
+          enable = true;
+        };
+        shellAliases = config.programs.bash.shellAliases;
+      };
+
+      direnv.enable = true;
+
       tmux = {
         enable = true;
         terminal = "tmux-direct";
