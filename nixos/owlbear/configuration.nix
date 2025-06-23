@@ -53,31 +53,16 @@
       "kvm"
     ];
     packages = with pkgs; [
-      kdePackages.kate
       thunderbird
-      telegram-desktop
-      zotero-beta
-      vesktop
-      yubioath-flutter
-      kitty
-      qbittorrent
-      tor-browser
       intel-gpu-tools
       # Language servers
-      tinymist
-      typst
       # VS Code
       # vscode-fhs
       # Gaming?
-      lutris
-      xivlauncher
       # Libreoffice
-      libreoffice-qt6-fresh
 
       neovide
       wl-clipboard
-
-      gnumake
 
       emacs
     ];

@@ -45,6 +45,7 @@
 
         # For convenient text edits
         kdePackages.kate
+        kitty
 
         # Chat clients
         telegram-desktop
@@ -60,6 +61,9 @@
         qbittorrent
 
         yubioath-flutter
+
+        tinymist
+        typst
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
