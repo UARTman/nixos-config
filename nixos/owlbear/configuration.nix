@@ -122,8 +122,7 @@
     };
   };
 
-  
-  boot.kernelParams = ["i915.enable_psr=1"];
+  boot.kernelParams = [ "i915.enable_psr=1" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # This value determines the NixOS release from which the default
