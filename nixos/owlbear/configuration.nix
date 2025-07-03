@@ -25,6 +25,8 @@
 
   networking.hostName = "owlbear";
 
+  services.hardware.bolt.enable = true;
+
   hardware.trackpoint = {
     enable = true;
     device = "TPPS/2 Synaptics TrackPoint";
@@ -41,6 +43,10 @@
       intel-media-driver
     ];
   };
+
+  hardware.intel-gpu-tools.enable = true;
+
+  # virtualisation.vmware.host.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.uartman = {
@@ -72,6 +78,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     self.inputs.nix-alien.packages.x86_64-linux.nix-alien
+    mangohud
+    kdePackages.plasma-thunderbolt
   ];
 
   programs.nix-ld = {
@@ -81,6 +89,7 @@
       # wayland
       # libX11
       (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
+      mangohud
     ];
   };
 
@@ -98,6 +107,13 @@
       folders = {
         "Main Obsidian Vault" = {
           path = "/home/uartman/Documents/Obsidian vaults/Main Vault/";
+          devices = [
+            "uartpc"
+            "pixel"
+          ];
+        };
+        "Shared Music" = {
+          path = "/home/uartman/Music/Shared/";
           devices = [
             "uartpc"
             "pixel"

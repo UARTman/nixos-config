@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -72,7 +77,7 @@
   };
 
   programs.nvf = {
-    enable = true;
+    # enable = true;
     settings.vim = {
       viAlias = true;
       vimAlias = true;
@@ -100,9 +105,11 @@
           lsp.server = "nixd";
           format.type = "nixfmt";
         };
-        # markdown.enable = true; -- wait for nixpkgs deno fix
+        markdown.enable = true; # wait for nixpkgs deno fix?
         lua.enable = true;
         lua.lsp.lazydev.enable = true;
+        rust.enable = true;
+        rust.lsp.package = ["rust-analyzer"];
       };
 
       statusline = {
@@ -208,6 +215,9 @@
         tabstop = 8;
         softtabstop = 2;
       };
+
+      treesitter.indent.enable = true;
+      treesitter.grammars = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [ idris ];
 
       keymaps = [
         {
