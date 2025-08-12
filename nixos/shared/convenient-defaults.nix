@@ -51,6 +51,8 @@
         kdePackages.kate
         kitty
 
+        vscode
+
         # Chat clients
         telegram-desktop
         vesktop
