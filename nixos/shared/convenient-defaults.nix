@@ -258,7 +258,15 @@
 
       fish = {
         enable = true;
-        shellAbbrs = config.programs.bash.shellAliases;
+        shellAbbrs = {
+          snrf = "sudo nixos-rebuild --flake .#${config.networking.hostName}";
+          switch-to-configuration = "/run/current-system/bin/switch-to-configuration";
+          nix-regen-boot = "sudo /run/current-system/bin/switch-to-configuration boot";
+          hmf = "home-manager --flake .#$hostname-$USER";
+          lg = "lazygit";
+          ljj = "lazyjj";
+        };
+
         # useBabelfish = true;
       };
 
