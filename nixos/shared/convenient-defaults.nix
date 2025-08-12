@@ -19,6 +19,10 @@
         git
         lazygit
 
+        jujutsu
+        lazyjj
+        meld # Diff editor...
+
         # Direnv - for nix stuff - TODO: Direnv enable option?
         direnv
 
