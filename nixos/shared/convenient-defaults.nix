@@ -64,6 +64,18 @@
 
         tinymist
         typst
+
+        fishPlugins.done
+        # fishPlugins.fzf
+        fishPlugins.fzf-fish
+        fishPlugins.forgit
+        fishPlugins.grc
+        grc
+
+        delta
+        fd
+        bat
+
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
@@ -225,6 +237,14 @@
         hmf = "home-manager --flake .#$HOSTNAME-$USER";
       };
 
+      bash.interactiveShellInit = ''
+        if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+        then
+          shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+          exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+        fi
+      '';
+
       zsh = {
         enable = true;
         enableBashCompletion = true;
@@ -238,6 +258,12 @@
           enable = true;
         };
         shellAliases = config.programs.bash.shellAliases;
+      };
+
+      fish = {
+        enable = true;
+        shellAbbrs = config.programs.bash.shellAliases;
+        # useBabelfish = true;
       };
 
       direnv.enable = true;
