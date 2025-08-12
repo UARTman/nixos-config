@@ -127,12 +127,21 @@
     kernelParams = [
       "i915.enable_psr=1"
       "i915.enable_guc=0"
+      "zswap.enabled=1"
     ];
     kernel.sysctl = {
       "dev.i915.perf_stream_paranoid" = 0;
+      "vm.swappiness" = 100;
     };
     kernelPackages = pkgs.linuxPackages_latest;
   };
+
+  systemd.oomd = {
+    enableRootSlice = true;
+    enableUserSlices = true;
+  };
+
+  # services.earlyoom.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
