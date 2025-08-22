@@ -89,6 +89,10 @@
     };
 
     services = {
+      udev.packages = [
+        pkgs.android-udev-rules
+      ];
+
       fwupd.enable = true;
 
       # Network discovery
@@ -212,6 +216,9 @@
     };
 
     programs = {
+      
+      adb.enable = true;
+        
       fzf = {
         keybindings = true;
         # fuzzyCompletion = true;

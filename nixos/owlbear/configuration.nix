@@ -57,6 +57,7 @@
       "wheel"
       "docker"
       "kvm"
+      "adbusers"
     ];
     packages = with pkgs; [
       thunderbird
