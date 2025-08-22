@@ -30,6 +30,10 @@
       # to avoid problems caused by different versions of nixpkgs.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -41,6 +45,7 @@
       nur,
       sops-nix,
       nvf,
+      rust-overlay,
       ...
     }@inputs:
     {
@@ -48,6 +53,14 @@
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
+          (
+            { ... }:
+            {
+              nixpkgs.overlays = [
+                rust-overlay.overlays.default
+              ];
+            }
+          )
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
           sops-nix.nixosModules.sops
