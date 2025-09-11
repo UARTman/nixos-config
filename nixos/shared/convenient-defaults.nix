@@ -20,8 +20,10 @@
         lazygit
 
         jujutsu
-        lazyjj
-        meld # Diff editor...
+        # lazyjj
+        kdiff3
+        jjui
+
 
         # Direnv - for nix stuff - TODO: Direnv enable option?
         direnv
@@ -79,9 +81,14 @@
         grc
 
         delta
+        difftastic
         fd
         bat
 
+        config.boot.kernelPackages.perf
+
+        texlive.combined.scheme-full
+        lyx
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
@@ -271,7 +278,7 @@
           nix-regen-boot = "sudo /run/current-system/bin/switch-to-configuration boot";
           hmf = "home-manager --flake .#$hostname-$USER";
           lg = "lazygit";
-          ljj = "lazyjj";
+          # ljj = "lazyjj";
         };
 
         # useBabelfish = true;
@@ -320,6 +327,10 @@
     fonts.packages = with pkgs; [
       nerd-fonts.iosevka
       iosevka
+      ipafont
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
     ];
 
     # For pipewire, TODO refactor
