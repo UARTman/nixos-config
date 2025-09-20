@@ -81,6 +81,7 @@
     self.inputs.nix-alien.packages.x86_64-linux.nix-alien
     mangohud
     kdePackages.plasma-thunderbolt
+    openssl
   ];
 
   programs.nix-ld = {

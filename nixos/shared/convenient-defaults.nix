@@ -92,6 +92,8 @@
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+        GMP_INCLUDEPATH = "${pkgs.lib.makeIncludePath [pkgs.gmp]}";
+        GMP_LIBRARYPATH = "${pkgs.lib.makeLibraryPath [pkgs.gmp]}";
       };
     };
 

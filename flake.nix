@@ -34,6 +34,10 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -46,6 +50,7 @@
       sops-nix,
       nvf,
       rust-overlay,
+      nix-index-database,
       ...
     }@inputs:
     {
@@ -65,6 +70,7 @@
           lanzaboote.nixosModules.lanzaboote
           sops-nix.nixosModules.sops
           nvf.nixosModules.default
+          nix-index-database.nixosModules.nix-index
           ./nixos/owlbear/configuration.nix
         ];
       };
@@ -85,6 +91,7 @@
           lanzaboote.nixosModules.lanzaboote
           sops-nix.nixosModules.sops
           nvf.nixosModules.default
+          nix-index-database.nixosModules.nix-index
           ./nixos/mimic/configuration.nix
         ];
       };
