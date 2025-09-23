@@ -117,7 +117,6 @@
     device = "/dev/disk/by-uuid/00EC74173638A268";
     fsType = "ntfs3";
     options = [
-      "discard"
       "rw"
       "uid=root"
       "gid=harddrives"
