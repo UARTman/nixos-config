@@ -32,6 +32,18 @@
     ];
   };
 
+  users.users.artem = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+      "kvm"
+      "adbusers"
+      "harddrives"
+    ];
+  };
+
   users.groups.harddrives = {
     name = "harddrives";
   };
@@ -90,19 +102,57 @@
   fileSystems."/mnt/windows" = {
     device = "/dev/disk/by-uuid/E47221BA7221927A";
     fsType = "ntfs3";
-    options = [ "discard" "rw" "uid=root" "gid=harddrives" "users" "umask=002" ];
+    options = [
+      "discard"
+      "rw"
+      "uid=root"
+      "gid=harddrives"
+      "users"
+      "umask=002"
+      "exec"
+    ];
   };
 
   fileSystems."/mnt/harddrive" = {
     device = "/dev/disk/by-uuid/00EC74173638A268";
     fsType = "ntfs3";
-    options = [ "discard" "rw" "uid=root" "gid=harddrives" "users" "umask=002" ];
+    options = [
+      "discard"
+      "rw"
+      "uid=root"
+      "gid=harddrives"
+      "users"
+      "umask=002"
+      "exec"
+    ];
   };
 
   fileSystems."/mnt/ssd" = {
     device = "/dev/disk/by-uuid/461C9DF81C9DE36B";
     fsType = "ntfs3";
-    options = [ "discard" "rw" "uid=root" "gid=harddrives" "users" "umask=002" ];
+    options = [
+      "discard"
+      "rw"
+      "uid=root"
+      "gid=harddrives"
+      "users"
+      "umask=002"
+      "exec"
+    ];
+  };
+
+  xdg = {
+    # enable = true;
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        kdePackages.xdg-desktop-portal-kde
+        xdg-desktop-portal-gtk
+      ];
+      config = {
+        common.default = [ "kde" ];
+      };
+    };
   };
 
   system.stateVersion = "24.05";
