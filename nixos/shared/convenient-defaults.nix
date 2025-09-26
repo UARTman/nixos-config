@@ -18,6 +18,8 @@
       systemPackages = with pkgs; [
         git
         lazygit
+        gh
+        sapling
 
         jujutsu
         # lazyjj
@@ -45,6 +47,7 @@
         gnupg
 
         gnumake
+        gcc
 
         # Libreoffice (TODO: try fixing wayland bug sometime soon)
         libreoffice-qt6-fresh

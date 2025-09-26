@@ -17,6 +17,9 @@
       "pixel9" = {
         id = "5RPMMEI-7VUROSB-PJNTON5-4VM5XOG-SW6QLS2-HFUSBHB-OF3AWE7-NKTJ4AD";
       };
+      "mimic" = {
+        id = "FT2X3DT-R4J6IKO-F7BP3UL-GOHFUTF-6PWXI6N-NCTLA4D-QTVBJ5T-EHRLFAU";
+      };
     };
   };
 }
