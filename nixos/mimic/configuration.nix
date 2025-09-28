@@ -110,6 +110,7 @@
       "users"
       "umask=002"
       "exec"
+      "acl"
     ];
   };
 
@@ -123,6 +124,7 @@
       "users"
       "umask=002"
       "exec"
+      "acl"
     ];
   };
 
@@ -137,6 +139,7 @@
       "users"
       "umask=002"
       "exec"
+      "acl"
     ];
   };
 
