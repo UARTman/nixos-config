@@ -53,6 +53,9 @@
   environment.systemPackages = with pkgs; [
     self.inputs.nix-alien.packages.x86_64-linux.nix-alien
     mangohud
+    lact
+    cemu
+    ryubing
   ];
 
   programs.nix-ld = {
@@ -68,6 +71,7 @@
 
   fonts.packages = with pkgs; [
     arkpandora_ttf
+    corefonts
   ];
 
   services.syncthing = {
@@ -155,6 +159,18 @@
         common.default = [ "kde" ];
       };
     };
+  };
+
+  systemd.services.lactd = {
+    enable = true;
+    description = "LACT Daemon";
+    serviceConfig = { 
+      ExecStart = "${pkgs.lact}/bin/lact daemon";
+      ExecStop = "pkill lact";
+      Restart = "on-failure";
+      RestartSec = 5; 
+    };
+    wantedBy = [ "default.target" ];
   };
 
   system.stateVersion = "24.05";
