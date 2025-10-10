@@ -93,6 +93,7 @@
       # libX11
       (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
       mangohud
+      libgcc
     ];
   };
 
