@@ -55,6 +55,7 @@
         # For convenient text edits
         kdePackages.kate
         kitty
+        wezterm
 
         vscode
 
@@ -88,15 +89,17 @@
         fd
         bat
 
-        config.boot.kernelPackages.perf
+        perf
 
         texlive.combined.scheme-full
         lyx
+
+        distrobox
+
+        uv
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
-        GMP_INCLUDEPATH = "${pkgs.lib.makeIncludePath [pkgs.gmp]}";
-        GMP_LIBRARYPATH = "${pkgs.lib.makeLibraryPath [pkgs.gmp]}";
         GTK_USE_PORTAL = "1";
       };
     };
@@ -243,7 +246,7 @@
 
       gnupg.agent = {
         enable = true;
-        enableSSHSupport = true;
+        # enableSSHSupport = true;
       };
 
       bash.shellAliases = {
@@ -302,6 +305,12 @@
         tunMode.enable = true;
       };
 
+      ssh = {
+        enableAskPassword = true;
+        askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+        startAgent = true;
+      };
+
     };
 
     # Allow unfree packages
@@ -316,6 +325,9 @@
     };
 
     virtualisation.docker.enable = true;
+    virtualisation.docker.rootless.enable = true;
+    # virtualisation.podman.enable = true;
+    # virtualisation.podman.dockerCompat = true;
 
     hardware = {
       graphics = {

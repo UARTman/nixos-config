@@ -58,6 +58,7 @@
       "docker"
       "kvm"
       "adbusers"
+      "wireshark"
     ];
     packages = with pkgs; [
       thunderbird
@@ -141,6 +142,13 @@
   systemd.oomd = {
     enableRootSlice = true;
     enableUserSlices = true;
+  };
+
+  programs.wireshark = {
+    package = pkgs.wireshark-qt;
+    enable = true;
+    dumpcap.enable = true;
+    usbmon.enable = true;
   };
 
   # services.earlyoom.enable = true;
