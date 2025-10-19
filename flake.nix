@@ -2,7 +2,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-alien.url = "github:thiagokokada/nix-alien";
-    # obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";
 

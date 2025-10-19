@@ -97,6 +97,12 @@
         distrobox
 
         uv
+
+        gtk3
+        gtksourceview3
+        adwaita-icon-theme
+        opam
+        pkg-config
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
@@ -309,6 +315,7 @@
         enableAskPassword = true;
         askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
         startAgent = true;
+        agentTimeout = "1h";
       };
 
     };
