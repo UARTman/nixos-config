@@ -56,6 +56,17 @@
     lact
     cemu
     ryubing
+    (prismlauncher.override {
+        additionalPrograms = with pkgs; [
+          ffmpeg
+        ];
+
+        additionalLibs = with pkgs; [
+          (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
+        ];
+    })
+    gamescope
+    ntfs3g
   ];
 
   programs.nix-ld = {
@@ -66,6 +77,7 @@
       # libX11
       (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
       mangohud
+      
     ];
   };
 
@@ -172,6 +184,13 @@
     };
     wantedBy = [ "default.target" ];
   };
+
+  networking.firewall.allowedUDPPorts = [ 27031 27036 10400 10401 ];
+  networking.firewall.allowedTCPPorts = [ 27036 27037 ];
+
+  programs.alvr.enable = true;
+  programs.alvr.openFirewall = true;
+  
 
   system.stateVersion = "24.05";
 }

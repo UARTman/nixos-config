@@ -89,6 +89,7 @@
         bat
 
         perf
+        linuxPackages_latest.cpupower
 
         texlive.combined.scheme-full
         lyx
