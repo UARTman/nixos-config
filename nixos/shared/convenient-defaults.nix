@@ -26,7 +26,6 @@
         kdiff3
         jjui
 
-
         # Direnv - for nix stuff - TODO: Direnv enable option?
         direnv
 
@@ -103,6 +102,9 @@
         adwaita-icon-theme
         opam
         pkg-config
+
+        calibre
+        fanficfare
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
@@ -112,7 +114,7 @@
 
     services = {
       udev.packages = [
-        pkgs.android-udev-rules
+        # pkgs.android-udev-rules
       ];
 
       fwupd.enable = true;
@@ -238,9 +240,9 @@
     };
 
     programs = {
-      
+
       adb.enable = true;
-        
+
       fzf = {
         keybindings = true;
         # fuzzyCompletion = true;
@@ -360,6 +362,22 @@
 
     # For pipewire, TODO refactor
     security.rtkit.enable = true;
+
+    # For VSCode LiveShare
+    networking.firewall = {
+      allowedTCPPortRanges = [
+        {
+          from = 5990;
+          to = 5999;
+        }
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 5990;
+          to = 5999;
+        }
+      ];
+    };
 
   };
 }
