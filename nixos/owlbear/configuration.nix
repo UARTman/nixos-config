@@ -84,20 +84,6 @@
     openssl
   ];
 
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      # fontconfig
-      # wayland
-      # libX11
-      (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
-      mangohud
-      stdenv.cc.cc.lib
-      libgcc.lib
-      libcxx
-    ];
-  };
-
   virtualisation.waydroid.enable = true;
 
   fonts.packages = with pkgs; [

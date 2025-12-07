@@ -56,6 +56,7 @@
     lact
     cemu
     ryubing
+    beyond-all-reason
     (prismlauncher.override {
         additionalPrograms = with pkgs; [
           ffmpeg
@@ -68,18 +69,6 @@
     gamescope
     ntfs3g
   ];
-
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      # fontconfig
-      # wayland
-      # libX11
-      (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
-      mangohud
-      
-    ];
-  };
 
   fonts.packages = with pkgs; [
     arkpandora_ttf
