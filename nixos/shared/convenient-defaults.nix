@@ -106,6 +106,8 @@
 
         calibre
         fanficfare
+
+        elan
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
