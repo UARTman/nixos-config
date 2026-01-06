@@ -108,6 +108,8 @@
         fanficfare
 
         elan
+
+        pkgs.android-tools
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
@@ -169,7 +171,7 @@
         # brlaser # Drivers for some Brother printers
         brgenml1lpr
         brgenml1cupswrapper # Generic drivers for more Brother printers [1]
-        cnijfilter2 # Drivers for some Canon Pixma devices (Proprietary driver)
+        # cnijfilter2 # Drivers for some Canon Pixma devices (Proprietary driver) (Compile error)
         epson-escpr2 # Drivers for Epson AirPrint devices
         epson-escpr # Drivers for some other Epson devices
         cups-kyocera-3500-4500 # ISP RAS Kyocera printer
@@ -244,7 +246,7 @@
 
     programs = {
 
-      adb.enable = true;
+      # adb.enable = true;
 
       fzf = {
         keybindings = true;

@@ -1,5 +1,6 @@
 {
   inputs = {
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-alien.url = "github:thiagokokada/nix-alien";
     lanzaboote = {
@@ -50,6 +51,7 @@
       nvf,
       rust-overlay,
       nix-index-database,
+      determinate,
       ...
     }@inputs:
     {
@@ -78,6 +80,7 @@
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
+          determinate.nixosModules.default
           (
             { ... }:
             {
