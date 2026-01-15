@@ -376,6 +376,8 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
+      arkpandora_ttf
+      open-dyslexic
     ];
 
     # For pipewire, TODO refactor
