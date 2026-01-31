@@ -58,13 +58,13 @@
     ryubing
     beyond-all-reason
     (prismlauncher.override {
-        additionalPrograms = with pkgs; [
-          ffmpeg
-        ];
+      additionalPrograms = with pkgs; [
+        ffmpeg
+      ];
 
-        additionalLibs = with pkgs; [
-          (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
-        ];
+      additionalLibs = with pkgs; [
+        (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
+      ];
     })
     gamescope
     ntfs3g
@@ -104,49 +104,24 @@
     enableUserSlices = true;
   };
 
-  fileSystems."/mnt/windows" = {
-    device = "/dev/disk/by-uuid/E47221BA7221927A";
-    fsType = "ntfs3";
-    options = [
-      "discard"
-      "rw"
-      "uid=root"
-      "gid=harddrives"
-      "users"
-      "umask=002"
-      "exec"
-      "acl"
-    ];
+  fileSystems = {
+    "/mnt/harddrive" = {
+      device = "/dev/disk/by-uuid/6efbfb86-97f7-45f2-8b06-a3c4c10ad36e";
+      fsType = "ext4";
+    };
+
+    "/mnt/ssd" = {
+      device = "/dev/disk/by-uuid/ceff12d1-5af9-40de-9772-1e555fdcbe8c";
+      fsType = "ext4";
+    };
   };
 
-  fileSystems."/mnt/harddrive" = {
-    device = "/dev/disk/by-uuid/00EC74173638A268";
-    fsType = "ntfs3";
-    options = [
-      "rw"
-      "uid=root"
-      "gid=harddrives"
-      "users"
-      "umask=002"
-      "exec"
-      "acl"
-    ];
-  };
-
-  fileSystems."/mnt/ssd" = {
-    device = "/dev/disk/by-uuid/461C9DF81C9DE36B";
-    fsType = "ntfs3";
-    options = [
-      "discard"
-      "rw"
-      "uid=root"
-      "gid=harddrives"
-      "users"
-      "umask=002"
-      "exec"
-      "acl"
-    ];
-  };
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 16 * 1024;
+    }
+  ];
 
   xdg = {
     # enable = true;
@@ -165,21 +140,28 @@
   systemd.services.lactd = {
     enable = true;
     description = "LACT Daemon";
-    serviceConfig = { 
+    serviceConfig = {
       ExecStart = "${pkgs.lact}/bin/lact daemon";
       ExecStop = "pkill lact";
       Restart = "on-failure";
-      RestartSec = 5; 
+      RestartSec = 5;
     };
     wantedBy = [ "default.target" ];
   };
 
-  networking.firewall.allowedUDPPorts = [ 27031 27036 10400 10401 ];
-  networking.firewall.allowedTCPPorts = [ 27036 27037 ];
+  networking.firewall.allowedUDPPorts = [
+    27031
+    27036
+    10400
+    10401
+  ];
+  networking.firewall.allowedTCPPorts = [
+    27036
+    27037
+  ];
 
   programs.alvr.enable = true;
   programs.alvr.openFirewall = true;
-  
 
   system.stateVersion = "24.05";
 }
