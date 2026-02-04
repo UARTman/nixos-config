@@ -60,16 +60,7 @@
       "wireshark"
     ];
     packages = with pkgs; [
-      thunderbird
       intel-gpu-tools
-      # Language servers
-      # VS Code
-      # vscode-fhs
-      # Gaming?
-      # Libreoffice
-
-      neovide
-      wl-clipboard
 
       emacs
     ];
@@ -78,8 +69,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    self.inputs.nix-alien.packages.x86_64-linux.nix-alien
-    mangohud
     kdePackages.plasma-thunderbolt
     openssl
   ];
@@ -139,32 +128,15 @@
     usbmon.enable = true;
   };
 
-  # security.pki.certificateFiles = [ "/etc/squid/gusevaa-mstpr251-bump.crt" ];
-  # services.squid = {
-  #   enable = true;
-  #   extraConfig = ''
-  #     acl block url_regex ^http:\/\/ident\.me.*
-  #     acl good url_regex ^http:\/\/httpbin\.org.*
-  #     acl mod url_regex ^http:\/\/httpbin\.org\/ip.*
-  #     http_access deny block
-  #     http_access allow good
-  #     request_header_access User-Agent deny mod
-  #     request_header_add User-Agent gusevaa mod
-  #     sslcrtd_program ${pkgs.squid}/libexec/security_file_certgen -s /var/cache/squid/ssl_db -M 4MB
-  #     http_port 3129 ssl-bump generate-host-certificates=on dynamic_cert_mem_cache_size=4MB cert=/var/cache/squid/gusevaa-mstpr251-bump.crt key=/var/cache/squid/gusevaa-mstpr251-bump.key cafile=/var/cache/squid/gusevaa-mstpr251-ca.crt
-  #     acl block_ssl ssl::server_name ident.me
-  #     acl step1 at_step SslBump1
-  #     ssl_bump peek step1
-  #     ssl_bump splice !block_ssl
-  #     ssl_bump terminate all
-  #     debug_options ALL,9
-  #   '';
-  # };
-  # systemd.services.squid.serviceConfig.execStart = "";
-
-
-
-  # services.earlyoom.enable = true;
+  services.postgresql = {
+    enable = true;
+    # package = pkgs.postgresql.pg_config;
+    # ensureDatabases = [ "mydatabase" ];
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type database  DBuser  auth-method
+      local all       all     trust
+    '';
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -16,6 +16,8 @@
 
     environment = {
       systemPackages = with pkgs; [
+        inputs.nix-alien.packages.x86_64-linux.nix-alien
+
         git
         lazygit
         gh
@@ -53,6 +55,8 @@
 
         # For convenient text edits
         kdePackages.kate
+        kdePackages.filelight
+
         kitty
         wezterm
 
@@ -110,6 +114,11 @@
         elan
 
         pkgs.android-tools
+
+        mangohud
+
+        neovide
+        wl-clipboard
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
@@ -337,6 +346,11 @@
           nss
           nspr
         ];
+      };
+
+      thunderbird = {
+        enable = true;
+        preferencesStatus = "user";
       };
     };
 

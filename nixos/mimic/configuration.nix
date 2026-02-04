@@ -51,8 +51,6 @@
   time.hardwareClockInLocalTime = true;
 
   environment.systemPackages = with pkgs; [
-    self.inputs.nix-alien.packages.x86_64-linux.nix-alien
-    mangohud
     lact
     cemu
     ryubing
