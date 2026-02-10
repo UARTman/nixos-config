@@ -373,10 +373,10 @@
       nixpkgs.flake = inputs.nixpkgs;
     };
 
-    virtualisation.docker.enable = true;
-    virtualisation.docker.rootless.enable = true;
-    # virtualisation.podman.enable = true;
-    # virtualisation.podman.dockerCompat = true;
+    # virtualisation.docker.enable = true;
+    # virtualisation.docker.rootless.enable = true;
+    virtualisation.podman.enable = true;
+    virtualisation.podman.dockerCompat = true;
 
     hardware = {
       graphics = {
