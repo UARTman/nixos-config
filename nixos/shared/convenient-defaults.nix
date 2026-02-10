@@ -119,6 +119,8 @@
 
         neovide
         wl-clipboard
+
+        smartmontools
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
@@ -224,6 +226,12 @@
         joinNetworks = [
           "1d71939404bd0816"
         ];
+      };
+
+      smartd = {
+        enable =  true;
+        # notifications.test = true;
+        notifications.x11.enable = true;
       };
     };
 
