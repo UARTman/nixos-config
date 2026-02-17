@@ -71,6 +71,8 @@
   environment.systemPackages = with pkgs; [
     kdePackages.plasma-thunderbolt
     openssl
+
+    pgcli
   ];
 
   virtualisation.waydroid.enable = true;
@@ -145,6 +147,8 @@
       }
     ];
   };
+
+  services.envfs.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
