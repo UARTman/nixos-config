@@ -121,6 +121,8 @@
         wl-clipboard
 
         smartmontools
+
+        krita
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
@@ -360,6 +362,8 @@
         enable = true;
         preferencesStatus = "user";
       };
+
+      xppen.enable = true;
     };
 
     # Allow unfree packages
