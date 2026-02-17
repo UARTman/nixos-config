@@ -4,7 +4,7 @@
   environment.systemPackages = with pkgs; [
     ripgrep
     nixd
-    nixfmt-rfc-style
+    nixfmt
     lua-language-server
     websocat
   ];
