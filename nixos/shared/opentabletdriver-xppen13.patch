@@ -1,0 +1,19 @@
+diff --git a/OpenTabletDriver.Configurations/Configurations/XP-Pen/Artist 13.3 Pro.json b/OpenTabletDriver.Configurations/Configurations/XP-Pen/Artist 13.3 Pro.json
+index a3d5abfa..435cb104 100644
+--- a/OpenTabletDriver.Configurations/Configurations/XP-Pen/Artist 13.3 Pro.json	
++++ b/OpenTabletDriver.Configurations/Configurations/XP-Pen/Artist 13.3 Pro.json	
+@@ -13,6 +13,14 @@
+     },
+     "AuxiliaryButtons": {
+       "ButtonCount": 8
++    },
++    "Wheel": {
++      "StepCount": 24,
++      "IsRelative": true,
++      "AngleOfZeroReading": 0.0,
++      "Buttons": {
++        "ButtonCount": 0
++      }
+     }
+   },
+   "DigitizerIdentifiers": [

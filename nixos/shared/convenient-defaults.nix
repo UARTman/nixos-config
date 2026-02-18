@@ -231,7 +231,7 @@
       };
 
       smartd = {
-        enable =  true;
+        enable = true;
         # notifications.test = true;
         notifications.x11.enable = true;
       };
@@ -362,8 +362,6 @@
         enable = true;
         preferencesStatus = "user";
       };
-
-      xppen.enable = true;
     };
 
     # Allow unfree packages
@@ -392,6 +390,10 @@
 
       # Enable bluetooth
       bluetooth.enable = true;
+
+      opentabletdriver.enable = true;
+      opentabletdriver.package = let otd = import ./otd.nix; in (otd pkgs);
+      uinput.enable = true;
 
     };
 
