@@ -392,7 +392,7 @@
       bluetooth.enable = true;
 
       opentabletdriver.enable = true;
-      opentabletdriver.package = let otd = import ./otd.nix; in (otd pkgs);
+      opentabletdriver.package = pkgs.callPackage ./otd.nix {};
       uinput.enable = true;
 
     };

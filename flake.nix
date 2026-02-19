@@ -38,11 +38,14 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+    };
   };
 
   outputs =
     {
-      self,
+      # self,
       nixpkgs,
       home-manager,
       lanzaboote,
@@ -52,61 +55,72 @@
       rust-overlay,
       nix-index-database,
       determinate,
+      flake-parts,
       ...
     }@inputs:
-    {
-      nixosConfigurations.owlbear = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = inputs;
-        modules = [
-          (
-            { ... }:
-            {
-              nixpkgs.overlays = [
-                rust-overlay.overlays.default
-              ];
-            }
-          )
-          nur.modules.nixos.default
-          lanzaboote.nixosModules.lanzaboote
-          sops-nix.nixosModules.sops
-          nvf.nixosModules.default
-          nix-index-database.nixosModules.nix-index
-          ./nixos/owlbear/configuration.nix
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      top@{
+        config,
+        withSystem,
+        moduleWithSystem,
+        flake-parts-lib,
+        ...
+      }:
+      {
+        imports = [
+          ./nixos/mimic/module.nix
         ];
-      };
-      
-      nixosConfigurations.mimic = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = inputs;
-        modules = [
-          determinate.nixosModules.default
-          (
-            { ... }:
-            {
-              nixpkgs.overlays = [
-                rust-overlay.overlays.default
-              ];
-            }
-          )
-          nur.modules.nixos.default
-          lanzaboote.nixosModules.lanzaboote
-          sops-nix.nixosModules.sops
-          nvf.nixosModules.default
-          nix-index-database.nixosModules.nix-index
-          ./nixos/mimic/configuration.nix
-        ];
-      };
+        flake = {
+          # Put your original flake attributes here.
+          nixosConfigurations.owlbear = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = inputs;
+            modules = [
+              (
+                { ... }:
+                {
+                  nixpkgs.overlays = [
+                    rust-overlay.overlays.default
+                  ];
+                }
+              )
+              nur.modules.nixos.default
+              lanzaboote.nixosModules.lanzaboote
+              sops-nix.nixosModules.sops
+              nvf.nixosModules.default
+              nix-index-database.nixosModules.nix-index
+              ./nixos/owlbear/configuration.nix
+            ];
+          };
 
-      homeConfigurations.owlbear-uartman = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = { inherit inputs; };
-        modules = [
-          nvf.homeManagerModules.default
-          ./home-manager/owlbear-uartman/home.nix
-        ];
-      };
+          homeConfigurations.owlbear-uartman = home-manager.lib.homeManagerConfiguration {
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+            extraSpecialArgs = { inherit inputs; };
+            modules = [
+              nvf.homeManagerModules.default
+              ./home-manager/owlbear-uartman/home.nix
+            ];
+          };
 
-      formatter."x86_64-linux" = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
-    };
+          formatter."x86_64-linux" = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
+
+        };
+        systems = [
+          # systems for which you want to build the `perSystem` attributes
+          "x86_64-linux"
+          # ...
+        ];
+        perSystem =
+          { config, pkgs, ... }:
+          {
+            packages.opentabletdriver = pkgs.callPackage ./shared/otd.nix {};
+            # Recommended: move all package definitions here.
+            # e.g. (assuming you have a nixpkgs input)
+            # packages.foo = pkgs.callPackage ./foo/package.nix { };
+            # packages.bar = pkgs.callPackage ./bar/package.nix {
+            #   foo = config.packages.foo;
+            # };
+          };
+      }
+    );
 }
