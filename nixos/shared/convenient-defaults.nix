@@ -427,5 +427,6 @@
       ];
     };
 
+    services.envfs.enable = true;
   };
 }
