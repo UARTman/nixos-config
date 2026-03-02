@@ -235,6 +235,10 @@
         # notifications.test = true;
         notifications.x11.enable = true;
       };
+
+      flatpak = {
+        enable = true;
+      };
     };
 
     # Enable networking
