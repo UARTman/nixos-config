@@ -130,16 +130,6 @@
     usbmon.enable = true;
   };
 
-  services.postgresql = {
-    enable = true;
-    # package = pkgs.postgresql.pg_config;
-    # ensureDatabases = [ "mydatabase" ];
-    authentication = pkgs.lib.mkOverride 10 ''
-      #type database  DBuser  auth-method
-      local all       all     trust
-    '';
-  };
-
   services.smartd = {
     devices = [
       {
