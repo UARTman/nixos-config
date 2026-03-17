@@ -124,7 +124,7 @@
   };
 
   programs.wireshark = {
-    package = pkgs.wireshark-qt;
+    package = pkgs.wireshark;
     enable = true;
     dumpcap.enable = true;
     usbmon.enable = true;

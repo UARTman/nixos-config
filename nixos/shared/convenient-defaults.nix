@@ -39,7 +39,7 @@
 
         obsidian
         obsidian-export
-        zotero-beta
+        zotero
 
         hunspell
         hunspellDicts.ru_RU
@@ -88,7 +88,7 @@
         grc
 
         delta
-        difftastic
+        # difftastic
         fd
         bat
 
