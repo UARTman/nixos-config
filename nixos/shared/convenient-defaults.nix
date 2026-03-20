@@ -123,6 +123,8 @@
         smartmontools
 
         krita
+
+        brave
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
