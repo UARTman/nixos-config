@@ -41,6 +41,9 @@
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
     };
+    pwndbg = {
+      url = "github:pwndbg/pwndbg";
+    };
   };
 
   outputs =

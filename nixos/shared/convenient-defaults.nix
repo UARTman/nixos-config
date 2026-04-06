@@ -125,6 +125,9 @@
         krita
 
         brave
+
+        ghidra
+        inputs.pwndbg.packages.x86_64-linux.default
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
@@ -380,6 +383,10 @@
     nix.registry = {
       nixpkgs.flake = inputs.nixpkgs;
     };
+
+    nixpkgs.config.permittedInsecurePackages = [
+      "python3.13-pypdf3-1.0.6"
+    ];
 
     # virtualisation.docker.enable = true;
     # virtualisation.docker.rootless.enable = true;
