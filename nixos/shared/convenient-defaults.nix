@@ -14,6 +14,14 @@
 
   config = {
 
+    nixpkgs.overlays = [
+      (_: prev: {
+        openldap = prev.openldap.overrideAttrs {
+          doCheck = !prev.stdenv.hostPlatform.isi686;
+        };
+      })
+    ];
+
     environment = {
       systemPackages = with pkgs; [
         inputs.nix-alien.packages.x86_64-linux.nix-alien
@@ -37,6 +45,7 @@
         vlc
         libvlc
 
+        logseq
         obsidian
         obsidian-export
         zotero
@@ -52,6 +61,7 @@
 
         # Libreoffice (TODO: try fixing wayland bug sometime soon)
         libreoffice-qt6-fresh
+        onlyoffice-desktopeditors
 
         # For convenient text edits
         kdePackages.kate
@@ -370,6 +380,10 @@
       thunderbird = {
         enable = true;
         preferencesStatus = "user";
+      };
+
+      amnezia-vpn = {
+        enable = true;
       };
     };
 
