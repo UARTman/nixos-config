@@ -77,10 +77,6 @@
 
   virtualisation.waydroid.enable = true;
 
-  fonts.packages = with pkgs; [
-    arkpandora_ttf
-  ];
-
   services.syncthing = {
     user = "uartman";
     dataDir = "/home/uartman/";

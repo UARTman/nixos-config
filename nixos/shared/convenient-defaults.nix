@@ -14,14 +14,6 @@
 
   config = {
 
-    nixpkgs.overlays = [
-      (_: prev: {
-        openldap = prev.openldap.overrideAttrs {
-          doCheck = !prev.stdenv.hostPlatform.isi686;
-        };
-      })
-    ];
-
     environment = {
       systemPackages = with pkgs; [
         inputs.nix-alien.packages.x86_64-linux.nix-alien
@@ -138,6 +130,7 @@
 
         ghidra
         inputs.pwndbg.packages.x86_64-linux.default
+        inputs.pwndbg.packages.x86_64-linux.pwndbg-lldb
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
@@ -286,6 +279,9 @@
 
       # adb.enable = true;
 
+      kdeconnect.enable = true;
+
+
       fzf = {
         keybindings = true;
         # fuzzyCompletion = true;
@@ -399,7 +395,8 @@
     };
 
     nixpkgs.config.permittedInsecurePackages = [
-      "python3.13-pypdf3-1.0.6"
+       "python3.13-pypdf3-1.0.6"
+      "electron-39.8.10"
     ];
 
     # virtualisation.docker.enable = true;
@@ -433,6 +430,7 @@
       noto-fonts-cjk-serif
       arkpandora_ttf
       open-dyslexic
+      corefonts
     ];
 
     # For pipewire, TODO refactor

@@ -13,12 +13,17 @@
     ../shared/convenient-defaults.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernel.sysctl = {
+      "vm.swappiness" = 10;
+    };
+
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+  };
 
   networking.hostName = "mimic";
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   users.users.uartman = {
     isNormalUser = true;
@@ -66,11 +71,6 @@
     })
     gamescope
     ntfs3g
-  ];
-
-  fonts.packages = with pkgs; [
-    arkpandora_ttf
-    corefonts
   ];
 
   services.syncthing = {
