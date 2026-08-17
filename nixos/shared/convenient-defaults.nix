@@ -97,7 +97,7 @@
         perf
         linuxPackages_latest.cpupower
 
-        texlive.combined.scheme-full
+        texliveFull
         lyx
 
         distrobox
@@ -395,7 +395,7 @@
     };
 
     nixpkgs.config.permittedInsecurePackages = [
-       "python3.13-pypdf3-1.0.6"
+      "python3.14-pypdf3-1.0.6"
       "electron-39.8.10"
     ];
 
@@ -431,6 +431,7 @@
       arkpandora_ttf
       open-dyslexic
       corefonts
+      symbola
     ];
 
     # For pipewire, TODO refactor
