@@ -1,6 +1,6 @@
 {
   inputs = {
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    # determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-alien.url = "github:thiagokokada/nix-alien";
     lanzaboote = {
@@ -57,7 +57,7 @@
       nvf,
       rust-overlay,
       nix-index-database,
-      determinate,
+      #determinate,
       flake-parts,
       ...
     }@inputs:

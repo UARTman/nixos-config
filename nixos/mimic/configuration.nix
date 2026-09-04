@@ -161,5 +161,7 @@
   programs.alvr.enable = true;
   programs.alvr.openFirewall = true;
 
+  nix.settings.substituters = [ "https://cache.nixos.org" ];
+
   system.stateVersion = "24.05";
 }

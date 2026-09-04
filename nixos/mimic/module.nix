@@ -11,7 +11,6 @@
     system = "x86_64-linux";
     specialArgs = inputs;
     modules = with inputs; [
-      determinate.nixosModules.default
       (
         { ... }:
         {
