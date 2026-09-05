@@ -58,6 +58,12 @@
         # For convenient text edits
         kdePackages.kate
         kdePackages.filelight
+        kdePackages.kio-gdrive
+        kdePackages.kio-extras
+        kdePackages.kio-fuse
+        kdePackages.kio-zeroconf
+        kdePackages.kaccounts-integration
+        kdePackages.kaccounts-providers
 
         kitty
         wezterm
@@ -131,6 +137,10 @@
         ghidra
         inputs.pwndbg.packages.x86_64-linux.default
         inputs.pwndbg.packages.x86_64-linux.pwndbg-lldb
+
+        rclone
+        rclone-ui
+        rclone-browser
       ];
       variables = {
         SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
@@ -281,7 +291,6 @@
 
       kdeconnect.enable = true;
 
-
       fzf = {
         keybindings = true;
         # fuzzyCompletion = true;
@@ -383,22 +392,27 @@
       };
     };
 
-    # Allow unfree packages
-    nixpkgs.config.allowUnfree = true;
-    # Allow flakes
-    nix.settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    nix.registry = {
-      nixpkgs.flake = inputs.nixpkgs;
+    nix = {
+      registry.nixpkgs.flake = inputs.nixpkgs;
+      settings = {
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+        substituters = [ "https://afnix-hydra.s3-bulk-web.afnix.fr/" ];
+        trusted-public-keys = [ "afnix:oqt801y+IwJ09XRtNDQYCKb7zuCw9DQXQk8fDWPkwxM=" ];
+      };
     };
 
-    nixpkgs.config.permittedInsecurePackages = [
-      "python3.14-pypdf3-1.0.6"
-      "electron-39.8.10"
-    ];
-
+    nixpkgs = {
+      config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [
+          "python3.14-pypdf3-1.0.6"
+          "electron-39.8.10"
+        ];
+      };
+    };
     # virtualisation.docker.enable = true;
     # virtualisation.docker.rootless.enable = true;
     virtualisation.podman.enable = true;

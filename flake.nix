@@ -44,6 +44,17 @@
     pwndbg = {
       url = "github:pwndbg/pwndbg";
     };
+    lix = {
+      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+      flake = false;
+    };
+
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.lix.follows = "lix";
+    };
+
   };
 
   outputs =
@@ -59,6 +70,7 @@
       nix-index-database,
       #determinate,
       flake-parts,
+      lix-module,
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } (
@@ -92,6 +104,7 @@
               sops-nix.nixosModules.sops
               nvf.nixosModules.default
               nix-index-database.nixosModules.nix-index
+              lix-module.nixosModules.default
               ./nixos/owlbear/configuration.nix
             ];
           };
@@ -116,7 +129,7 @@
         perSystem =
           { config, pkgs, ... }:
           {
-            packages.opentabletdriver = pkgs.callPackage ./shared/otd.nix {};
+            packages.opentabletdriver = pkgs.callPackage ./shared/otd.nix { };
             # Recommended: move all package definitions here.
             # e.g. (assuming you have a nixpkgs input)
             # packages.foo = pkgs.callPackage ./foo/package.nix { };

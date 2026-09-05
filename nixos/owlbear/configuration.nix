@@ -104,7 +104,7 @@
   boot = {
     kernelParams = [
       "i915.enable_psr=1"
-      "i915.enable_guc=0"
+      "i915.enable_guc=3"
       "zswap.enabled=1"
     ];
     kernel.sysctl = {
