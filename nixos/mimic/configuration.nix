@@ -56,7 +56,6 @@
   time.hardwareClockInLocalTime = true;
 
   environment.systemPackages = with pkgs; [
-    lact
     cemu
     ryubing
     beyond-all-reason
@@ -135,17 +134,8 @@
     };
   };
 
-  systemd.services.lactd = {
-    enable = true;
-    description = "LACT Daemon";
-    serviceConfig = {
-      ExecStart = "${pkgs.lact}/bin/lact daemon";
-      ExecStop = "pkill lact";
-      Restart = "on-failure";
-      RestartSec = 5;
-    };
-    wantedBy = [ "default.target" ];
-  };
+  services.lact.enable = true;
+  hardware.amdgpu.overdrive.enable = true;
 
   networking.firewall.allowedUDPPorts = [
     27031
