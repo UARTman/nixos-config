@@ -24,7 +24,7 @@
       sops-nix.nixosModules.sops
       nvf.nixosModules.default
       nix-index-database.nixosModules.nix-index
-      lix-module.nixosModules.default
+      # lix-module.nixosModules.default
       ./configuration.nix
     ];
   };

@@ -10,6 +10,7 @@
     ./idris2.nix
     ./neovim.nix
     ./syncthing.nix
+    ./use-lix.nix
   ];
 
   config = {
