@@ -13,7 +13,7 @@
     pkiBundle = "/var/lib/sbctl";
   };
 
-  boot.initrd.systemd.enable = true;
+  # boot.initrd.systemd.enable = true;
   boot.initrd.systemd.tpm2.enable = true;
 
   boot.plymouth.enable = true;
