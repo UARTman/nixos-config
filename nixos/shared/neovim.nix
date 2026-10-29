@@ -7,6 +7,7 @@
     nixfmt
     lua-language-server
     websocat
+    tree-sitter
   ];
 
   programs.neovim = {
