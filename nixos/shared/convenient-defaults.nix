@@ -206,7 +206,7 @@
         # cnijfilter2 # Drivers for some Canon Pixma devices (Proprietary driver) (Compile error)
         epson-escpr2 # Drivers for Epson AirPrint devices
         epson-escpr # Drivers for some other Epson devices
-        # cups-kyocera-3500-4500 # ISP RAS Kyocera printer
+        cups-kyocera-3500-4500 # ISP RAS Kyocera printer
       ];
 
       samba.enable = true;
@@ -409,6 +409,7 @@
       config = {
         allowUnfree = true;
         permittedInsecurePackages = [
+          "python3.14-pypdf3-1.0.6" # For printer driver :(
         ];
       };
     };
